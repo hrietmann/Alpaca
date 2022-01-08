@@ -19,7 +19,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
 //        .package(name: "CodableKit", url: "https://github.com/hrietmann/CodableKit.git", from: "1.0.0"),
-        .package(name: "TradeKit", url: "https://github.com/hrietmann/TradeKit.git", from: "1.0.0"),
+        .package(name: "TradeKit", url: "https://github.com/hrietmann/TradeKit.git", branch: "main"),
         .package(name: "LogKit", url: "https://github.com/hrietmann/LogKit.git", from: "1.0.0"),
         .package(name: "CodableKit", url: "https://github.com/hrietmann/CodableKit.git", branch: "main"),
     ],
