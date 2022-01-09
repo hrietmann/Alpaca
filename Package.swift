@@ -20,8 +20,6 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
 //        .package(name: "CodableKit", url: "https://github.com/hrietmann/CodableKit.git", from: "1.0.0"),
         .package(name: "TradeKit", url: "https://github.com/hrietmann/TradeKit.git", branch: "main"),
-        .package(name: "LogKit", url: "https://github.com/hrietmann/LogKit.git", from: "1.0.0"),
-        .package(name: "CodableKit", url: "https://github.com/hrietmann/CodableKit.git", branch: "main"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -30,8 +28,6 @@ let package = Package(
             name: "Alpaca",
             dependencies: [
                 .product(name: "TradeKit", package: "TradeKit"),
-                .product(name: "LogKit", package: "LogKit"),
-                .product(name: "CodableKit", package: "CodableKit"),
             ]
         ),
         .testTarget(

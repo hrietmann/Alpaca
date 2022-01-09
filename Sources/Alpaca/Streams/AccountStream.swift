@@ -25,19 +25,19 @@ struct AccountStream {
             Task {
                 do {
                     let url = "wss://\(environment.isPaper ? "paper-":"")api.alpaca.markets/stream"
-                    let socket = WebSocketStream(url: url) { stream in
-                        var body = Body()
-                        body.key_id = publicKey
-                        body.secret_key = secretKey
-                        let message = Message(action: .authenticate, data: body)
-                        let data = try JSONEncoder().encode(message)
-                        await stream.send(data)
-                    }
-                    
-                    
-                    for try await data in socket {
-                        try await handle(data: data, from: socket, continuation: continuation)
-                    }
+//                    let socket = WebsocketStream(url: url) { stream in
+//                        var body = Body()
+//                        body.key_id = publicKey
+//                        body.secret_key = secretKey
+//                        let message = Message(action: .authenticate, data: body)
+//                        let data = try JSONEncoder().encode(message)
+//                        await stream.send(data)
+//                    }
+//
+//
+//                    for try await data in socket.stream {
+//                        try await handle(data: data, from: socket, continuation: continuation)
+//                    }
                 } catch { continuation.finish(throwing: error) }
             }
         }
@@ -49,16 +49,17 @@ struct AccountStream {
         self.secretKey = secretKey
     }
     
-    private func handle(data: Data, from stream: WebSocketStream, continuation: AsyncThrowingStream<RealtimeData, Error>.Continuation) async throws {
+    private func handle(data: Data, from stream: WebsocketStream, continuation: AsyncThrowingStream<RealtimeData, Error>.Continuation) async throws {
         
         let response = try Response.from(data: data, debug: true)
         switch response.stream {
         case .authorization:
-            var body = Body()
-            body.streams = [.trade_updates]
-            let message = Message(action: .listen, data: body)
-            let data = try JSONEncoder().encode(message)
-            await stream.send(data)
+//            var body = Body()
+//            body.streams = [.trade_updates]
+//            let message = Message(action: .listen, data: body)
+//            let data = try JSONEncoder().encode(message)
+//            await stream.send(data)
+            break
             
         case .listening:
             break

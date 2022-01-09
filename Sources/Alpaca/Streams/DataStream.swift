@@ -22,10 +22,10 @@ struct DataStream {
         .init { continuation in
             Task {
                 do {
-                    let socket = WebSocketStream(url: assetClass == .market ? "wss://stream.data.alpaca.markets/v2/sip" : "wss://stream.data.alpaca.markets/v1beta1/crypto?exchanges=\(Exchange.coinbase.rawValue)")
-                    for try await data in socket {
-                        try await handle(data: data, from: socket, continuation: continuation)
-                    }
+//                    let socket = WebsocketStream(url: assetClass == .market ? "wss://stream.data.alpaca.markets/v2/sip" : "wss://stream.data.alpaca.markets/v1beta1/crypto?exchanges=\(Exchange.coinbase.rawValue)", on: <#EventLoopGroup#>)
+//                    for try await data in socket.stream {
+//                        try await handle(data: data, from: socket, continuation: continuation)
+//                    }
                     continuation.finish(throwing: nil)
                 } catch { continuation.finish(throwing: error) }
             }
@@ -39,7 +39,7 @@ struct DataStream {
         self.secretKey = secretKey
     }
     
-    private func handle(data: Data, from socket: WebSocketStream, continuation: AsyncThrowingStream<RealtimeData, Error>.Continuation) async throws {
+    private func handle(data: Data, from socket: WebsocketStream, continuation: AsyncThrowingStream<RealtimeData, Error>.Continuation) async throws {
         if let candles = try await candles(data: data)
         { candles.forEach { continuation.yield($0) } }
         if let quotes = try await quotes(data: data)
@@ -47,8 +47,8 @@ struct DataStream {
         if let trades = try await trades(data: data)
         { trades.forEach { continuation.yield($0) } }
         
-        try? await [Response].from(data: data).concurrentForEach
-        { try await handle(response: $0, socket: socket, continuation: continuation) }
+//        try? await [Response].from(data: data).concurrentForEach
+//        { try await handle(response: $0, socket: socket, continuation: continuation) }
     }
     
     private func candles(data: Data) async throws -> [RealtimeData]? {
@@ -79,31 +79,32 @@ struct DataStream {
             }
     }
     
-    private func handle(response: Response, socket: WebSocketStream, continuation: AsyncThrowingStream<RealtimeData,Error>.Continuation) async throws {
+    private func handle(response: Response, socket: WebsocketStream, continuation: AsyncThrowingStream<RealtimeData,Error>.Continuation) async throws {
         switch response.T {
         case .error:
             guard let message = response.msg, let code = response.code else { return }
             continuation.finish(throwing: AlpacaError(message: "Websocket error: \(message) (code \(code))"))
             
         case .success:
-            // Connection succeeded, sending auth request
-            if response.msg == "connected" {
-                var authentication = Message(action: .auth)
-                authentication.key = publicKey
-                authentication.secret = secretKey
-                let data = try authentication.data
-                await socket.send(data)
-            }
-            // Authentication succeeded, sending subscription request
-            if response.msg == "authenticated" {
-                var subscription = Message(action: .subscribe)
-                subscription.trades = assets
-                subscription.quotes = assets
-                subscription.bars = assets
-                subscription.dailyBars = assets
-                let data = try subscription.data
-                await socket.send(data)
-            }
+//            // Connection succeeded, sending auth request
+//            if response.msg == "connected" {
+//                var authentication = Message(action: .auth)
+//                authentication.key = publicKey
+//                authentication.secret = secretKey
+//                let data = try authentication.data
+//                await socket.send(data)
+//            }
+//            // Authentication succeeded, sending subscription request
+//            if response.msg == "authenticated" {
+//                var subscription = Message(action: .subscribe)
+//                subscription.trades = assets
+//                subscription.quotes = assets
+//                subscription.bars = assets
+//                subscription.dailyBars = assets
+//                let data = try subscription.data
+//                await socket.send(data)
+//            }
+            break
             
         case .subscription:
             let tradeAssets = response.trades ?? []
