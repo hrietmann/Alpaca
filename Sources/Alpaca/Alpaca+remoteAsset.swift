@@ -7,7 +7,9 @@
 
 import Foundation
 import TradeKit
-
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 
 

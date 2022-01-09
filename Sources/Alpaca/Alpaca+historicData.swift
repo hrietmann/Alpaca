@@ -8,6 +8,9 @@
 import Foundation
 import TradeKit
 import CodableKit
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 
 
