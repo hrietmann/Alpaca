@@ -11,7 +11,9 @@ import CodableKit
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-
+#if compiler(>=5.5) && canImport(_Concurrency)
+import _Concurrency
+#endif
 
 
 

@@ -8,6 +8,9 @@
 import Foundation
 import TradeKit
 import LogKit
+#if compiler(>=5.5) && canImport(_Concurrency)
+import _Concurrency
+#endif
 
 
 
