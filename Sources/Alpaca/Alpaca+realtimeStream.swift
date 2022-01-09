@@ -15,7 +15,7 @@ import LogKit
 extension Alpaca {
     
     
-    
+    #if compiler(>=5.5) && canImport(_Concurrency)
     nonisolated public func realtimeStream(for assets: [Asset]) -> AsyncThrowingStream<RealtimeData, Error> {
         .init { continuation in
             Task {
@@ -39,6 +39,7 @@ extension Alpaca {
             
         }
     }
+    #endif
     
     
     

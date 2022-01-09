@@ -17,6 +17,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     public func remoteOrders(_ status: Set<OrderStatus>, sorted by: SortDirection) async throws -> [TradeKit.Order] {
         let endpoint = environment.privateAPIURL
             .appendingPathComponent("v2")
@@ -43,6 +44,7 @@ extension Alpaca {
         let orders = try [Order].from(data: data)
         return orders
     }
+    #endif
     
     
 }

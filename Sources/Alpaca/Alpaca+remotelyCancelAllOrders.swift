@@ -16,6 +16,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     public func remotelyCancelAllOrders() async throws {
         let url = environment.privateAPIURL
             .appendingPathComponent("v2")
@@ -28,6 +29,7 @@ extension Alpaca {
         let (data, _) = try await URLSession.shared.data(for: request, delegate: nil)
         if let error = try? AlpacaError.from(data: data) { throw error }
     }
+    #endif
     
     
 }

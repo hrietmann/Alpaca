@@ -17,6 +17,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     public func remoteAsset(from symbol: AssetSymbol) async throws -> TradeKit.Asset? {
         let url = environment.privateAPIURL
             .appendingPathComponent("v2")
@@ -33,6 +34,7 @@ extension Alpaca {
         let asset = try Market.from(data: data)
         return asset
     }
+    #endif
     
     
 }

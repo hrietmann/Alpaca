@@ -18,6 +18,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     nonisolated public func historicData(of params: HistoricDataParams) -> AsyncThrowingStream<HistoricDataPage, Error> {
         var isFirstLoad = true
         var pageID: String? = nil
@@ -86,6 +87,7 @@ extension Alpaca {
             }
         }
     }
+    #endif
     
     
 }

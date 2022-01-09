@@ -17,6 +17,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     public func remoteLatestTrade(of asset: TradeKit.Asset) async throws -> TradeKit.Trade {
         let endpoint: URL
         switch asset.class {
@@ -48,6 +49,7 @@ extension Alpaca {
         let trade = try Trade.Latest.from(data: data).trade
         return trade
     }
+    #endif
     
     
 }

@@ -11,7 +11,7 @@ import LogKit
 
 
 
-
+#if compiler(>=5.5) && canImport(_Concurrency)
 struct DataStream {
     
     private let assetClass: AssetClass
@@ -119,3 +119,4 @@ struct DataStream {
     }
     
 }
+#endif

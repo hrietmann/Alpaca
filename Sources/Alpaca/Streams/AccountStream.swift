@@ -5,6 +5,7 @@
 //  Created by Hans Rietmann on 19/12/2021.
 //
 
+#if compiler(>=5.5) && canImport(_Concurrency)
 import Foundation
 import TradeKit
 
@@ -111,3 +112,4 @@ struct AccountStream {
     
     
 }
+#endif

@@ -17,6 +17,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     public func remotelyCloseAllPositions() async throws -> [TradeKit.Order] {
         let url = environment.privateAPIURL
             .appendingPathComponent("v2")
@@ -37,6 +38,7 @@ extension Alpaca {
         let response = try [PositionResponse].from(data: data)
         return response.compactMap { $0.body }
     }
+    #endif
     
     
 }

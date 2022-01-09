@@ -17,7 +17,7 @@ import FoundationNetworking
 extension Alpaca {
     
     
-    
+    #if compiler(>=5.5) && canImport(_Concurrency)
     public var remoteAccount: TradeKit.Account {
         get async throws {
             let url = environment.privateAPIURL
@@ -34,6 +34,7 @@ extension Alpaca {
             return account
         }
     }
+    #endif
     
     
     
