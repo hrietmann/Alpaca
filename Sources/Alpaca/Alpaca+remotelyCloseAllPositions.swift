@@ -20,7 +20,7 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public func remotelyCloseAllPositions() async throws -> [TradeKit.Order] {
         let url = environment.privateAPIURL
             .appendingPathComponent("v2")

@@ -20,7 +20,7 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public func remoteOrders(_ status: Set<OrderStatus>, sorted by: SortDirection) async throws -> [TradeKit.Order] {
         let endpoint = environment.privateAPIURL
             .appendingPathComponent("v2")

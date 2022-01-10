@@ -20,7 +20,7 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     nonisolated public func historicData(of params: HistoricDataParams) -> AsyncThrowingStream<HistoricDataPage, Error> {
         var isFirstLoad = true
         var pageID: String? = nil

@@ -11,12 +11,15 @@ import CodableKit
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
+#if compiler(>=5.5) && canImport(_Concurrency)
+import _Concurrency
+#endif
 
 
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public var remotePositions: [TradeKit.Position] {
         get async throws {
             let url = environment.privateAPIURL

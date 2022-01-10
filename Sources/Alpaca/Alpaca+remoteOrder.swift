@@ -19,7 +19,7 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public func remoteOrder(_ id: UUID) async throws -> TradeKit.Order? {
         
         // Fetching order with the same id as the given id

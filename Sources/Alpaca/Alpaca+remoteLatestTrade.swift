@@ -20,7 +20,7 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public func remoteLatestTrade(of asset: TradeKit.Asset) async throws -> TradeKit.Trade {
         let endpoint: URL
         switch asset.class {
