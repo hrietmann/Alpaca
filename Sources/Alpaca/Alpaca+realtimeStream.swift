@@ -18,7 +18,7 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+//#if compiler(>=5.5) && canImport(_Concurrency)
     nonisolated public func realtimeStream(for assets: [Asset]) -> AsyncThrowingStream<RealtimeData, Error> {
         .init { continuation in
             Task {
@@ -42,7 +42,11 @@ extension Alpaca {
             
         }
     }
-    #endif
+//    #else
+//    public func realtimeStream(for assets: [Asset]) -> AsyncThrowingStream<RealtimeData, Error> {
+//        .init { nil }
+//    }
+//#endif
     
     
     

@@ -16,10 +16,11 @@ import _Concurrency
 
 
 
+//#if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
+    
     public func remotePosition(on asset: Asset) async throws -> TradeKit.Position? {
         let url = environment.privateAPIURL
             .appendingPathComponent("v2")
@@ -36,7 +37,7 @@ extension Alpaca {
         let position = try Position.from(data: data, debug: true)
         return position
     }
-    #endif
     
     
 }
+//#endif

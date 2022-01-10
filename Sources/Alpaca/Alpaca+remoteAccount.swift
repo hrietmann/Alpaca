@@ -19,7 +19,8 @@ import _Concurrency
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
+    
+//#if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public var remoteAccount: TradeKit.Account {
         get async throws {
             let url = environment.privateAPIURL
@@ -36,7 +37,9 @@ extension Alpaca {
             return account
         }
     }
-    #endif
+//    #else
+//    nonisolated public var remoteAccount: TradeKit.Account { Account(cash: 1) }
+//#endif
     
     
     

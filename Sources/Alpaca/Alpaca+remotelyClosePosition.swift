@@ -17,10 +17,11 @@ import _Concurrency
 
 
 
+//#if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
+    
     public func remotelyClose(_ unit: PositionUnit, of position: TradeKit.Position) async throws -> TradeKit.Order {
         let endpoint = environment.privateAPIURL
             .appendingPathComponent("v2")
@@ -46,7 +47,7 @@ extension Alpaca {
         let order = try Order.from(data: data)
         return order
     }
-    #endif
     
     
 }
+//#endif

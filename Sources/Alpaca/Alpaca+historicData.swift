@@ -16,12 +16,12 @@ import _Concurrency
 #endif
 
 
-
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     nonisolated public func historicData(of params: HistoricDataParams) -> AsyncThrowingStream<HistoricDataPage, Error> {
+
+//        #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
         var isFirstLoad = true
         var pageID: String? = nil
         
@@ -88,8 +88,10 @@ extension Alpaca {
             case .quotes: return .quotes(page.quotes ?? [])
             }
         }
+//#else
+//        return .init { nil }
+//#endif
     }
-    #endif
     
     
 }

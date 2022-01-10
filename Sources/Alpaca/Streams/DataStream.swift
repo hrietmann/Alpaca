@@ -24,13 +24,13 @@ struct DataStream {
     var stream: AsyncThrowingStream<RealtimeData, Error> {
         .init { continuation in
             Task {
-                do {
+//                do {
 //                    let socket = WebsocketStream(url: assetClass == .market ? "wss://stream.data.alpaca.markets/v2/sip" : "wss://stream.data.alpaca.markets/v1beta1/crypto?exchanges=\(Exchange.coinbase.rawValue)", on: <#EventLoopGroup#>)
 //                    for try await data in socket.stream {
 //                        try await handle(data: data, from: socket, continuation: continuation)
 //                    }
-                    continuation.finish(throwing: nil)
-                } catch { continuation.finish(throwing: error) }
+//                    continuation.finish(throwing: nil)
+//                } catch { continuation.finish(throwing: error) }
             }
         }
     }

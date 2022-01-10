@@ -14,7 +14,6 @@ import TradeKit
 
 
 
-
 public actor Alpaca: Broker {
     
     
@@ -68,12 +67,12 @@ public actor Alpaca: Broker {
         environment = env
     }
     
-    #if canImport(FoundationNetworking)
+//    #if canImport(FoundationNetworking)
     func setHeader(to request: inout URLRequest) {
         request.addValue(publicKey, forHTTPHeaderField: "APCA-API-KEY-ID")
         request.addValue(secretKey, forHTTPHeaderField: "APCA-API-SECRET-KEY")
     }
-    #endif
+//    #endif
     
     nonisolated public func sampleAccount(cash: Double) -> TradeKit.Account {
         Account(cash: cash)

@@ -16,11 +16,11 @@ import _Concurrency
 #endif
 
 
-
 extension Alpaca {
     
     
-    #if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
+    
+//#if compiler(>=5.5) && canImport(_Concurrency) && canImport(FoundationNetworking)
     public func remoteLatestQuote(of asset: TradeKit.Asset) async throws -> TradeKit.Quote {
         let endpoint: URL
         switch asset.class {
@@ -52,7 +52,12 @@ extension Alpaca {
         let quote = try Quote.Latest.from(data: data).quote
         return quote
     }
-    #endif
+//    #else
+//    public func remoteLatestQuote(of asset: TradeKit.Asset) async throws -> TradeKit.Quote {
+//        let n = Number(0)
+//        return Quote(S: nil, x: nil, ax: nil, ap: n, as: n, bx: nil, bp: n, bs: n, t: "", c: nil, z: nil)
+//    }
+//#endif
     
     
     

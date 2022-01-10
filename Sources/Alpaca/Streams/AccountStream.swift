@@ -27,8 +27,8 @@ struct AccountStream {
     var stream: AsyncThrowingStream<RealtimeData,Error> {
         .init { continuation in
             Task {
-                do {
-                    let url = "wss://\(environment.isPaper ? "paper-":"")api.alpaca.markets/stream"
+//                do {
+//                    let url = "wss://\(environment.isPaper ? "paper-":"")api.alpaca.markets/stream"
 //                    let socket = WebsocketStream(url: url) { stream in
 //                        var body = Body()
 //                        body.key_id = publicKey
@@ -42,7 +42,7 @@ struct AccountStream {
 //                    for try await data in socket.stream {
 //                        try await handle(data: data, from: socket, continuation: continuation)
 //                    }
-                } catch { continuation.finish(throwing: error) }
+//                } catch { continuation.finish(throwing: error) }
             }
         }
     }
